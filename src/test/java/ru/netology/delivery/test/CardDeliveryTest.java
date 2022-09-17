@@ -37,13 +37,9 @@ class CardDeliveryTest {
         $("[data-test-id='agreement']").click();
         $x("//span[@class='button__text']").click();
         $x("//*[contains(text(),'Успешно!')]").shouldBe(Condition.visible, Duration.ofSeconds(15));
-        $("[class='notification__content']").shouldHave(Condition.exactText("Встреча успешно запланирована на " + firstMeetingDate));
+        $("[class='notification__content']").shouldHave(Condition.exactText("Встреча успешно забронирована на " + firstMeetingDate));
         $x("//input[@placeholder='Дата встречи']").doubleClick().sendKeys(Keys.DELETE);
         $x("//input[@placeholder='Дата встречи']").setValue(secondMeetingDate);
         $x("//span[@class='button__text']").click();
-        $x("//button[contains(@class,'button')]").click();
-        $x("//input[@placeholder='Дата встречи']").setValue(secondMeetingDate);
-
-
     }
 }
