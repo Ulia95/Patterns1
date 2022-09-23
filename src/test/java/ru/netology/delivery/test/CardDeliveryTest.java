@@ -24,9 +24,9 @@ class CardDeliveryTest {
     @DisplayName("Plan and re-plan the meeting")
     void shouldSuccessfulPlanAndReplanMeeting() {
         var validUser = DataGenerator.Registration.generateUser("ru");
-        var daysToAddForFirstMeeting = 20;
+        var daysToAddForFirstMeeting = 3;
         var firstMeetingDate = DataGenerator.generateDate(daysToAddForFirstMeeting);
-        var daysToAddForSecondMeeting = 23;
+        var daysToAddForSecondMeeting = 5;
         var secondMeetingDate = DataGenerator.generateDate(daysToAddForSecondMeeting);
 
         $("[data-test-id='city'] input").setValue(validUser.getCity());
@@ -41,5 +41,8 @@ class CardDeliveryTest {
         $x("//input[@placeholder='Дата встречи']").doubleClick().sendKeys(Keys.DELETE);
         $x("//input[@placeholder='Дата встречи']").setValue(secondMeetingDate);
         $x("//span[@class='button__text']").click();
+        $x("//*[contains(text(),'Успешно!')]").shouldBe(Condition.visible, Duration.ofSeconds(15));
+        $("[class='notification__content']").shouldHave(Condition.exactText("Встреча успешно забронирована на " + secondMeetingDate));
+
     }
 }
